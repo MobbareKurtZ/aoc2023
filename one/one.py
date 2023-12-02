@@ -44,7 +44,7 @@ if __name__ == "__main__":
         "xtwone3four",
         "4nineeightseven2",
         "zoneight234",
-        "7pqrstsixteen",
+        "one7pqrstsixteenone",
     ]
-    # print(part_two("", test))
-    print(part_two("input.txt"))
+    print(part_two("", test))
+    # print(part_two("input.txt"))
