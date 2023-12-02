@@ -20,16 +20,32 @@ def part_two(input_path="", test=None):
             cals = file.readlines()
     else:
         cals = test
-    td = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
     val = 0
     for cal in cals:
-        ds = re.findall(r"\d|" + "|".join(td), cal)
-        f = ds[0] if len(ds[0]) == 1 else td.index(ds[0]) + 1
-        l = ds[-1] if len(ds[-1]) == 1 else td.index(ds[-1]) + 1
-        d = int(f"{f}{l}")
+        cal = t2d(cal)
+        ds = re.findall(r"\d", cal)
+        d = int(f"{ds[0]}{ds[-1]}")
         val += d
 
     return val
+
+
+def t2d(txt):
+    td = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    i = 0
+    s = ""
+    ns = txt
+    print(txt)
+    while i < len(txt):
+        s += txt[i]
+        m = None
+        for idx, t in enumerate(td):
+            m = re.search(rf"{re.escape(t)}", s)
+            if m:
+                ns = re.sub(rf"{m.group()}", str(idx + 1), ns)
+        i += 1
+    print(ns)
+    return ns
 
 
 if __name__ == "__main__":
@@ -44,7 +60,7 @@ if __name__ == "__main__":
         "xtwone3four",
         "4nineeightseven2",
         "zoneight234",
-        "one7pqrstsixteenone",
+        "7pqrstsixteen",
     ]
-    print(part_two("", test))
-    # print(part_two("input.txt"))
+    # print(part_two("", test))
+    print(part_two("input.txt"))

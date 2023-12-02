@@ -13,6 +13,35 @@ def first(input_path=""):
     return idxsum
 
 
+def second(input_path="", test=None):
+    if test:
+        games = test
+    else:
+        with open(input_path, "r") as file:
+            games = file.readlines()
+    res = 0
+    for game in games:
+        game = format_game(game)
+        lgame = least_cube(game)[0]
+        print(lgame)
+        res += lgame[0] * lgame[1] * lgame[2]
+    return res
+
+
+def least_cube(game):
+    lgame = []
+    l = [0, 0, 0]
+    for r in game:
+        if int(r[0]) > int(l[0]) and int(r[0]) != 0:
+            l[0] = int(r[0])
+        if int(r[1]) > int(l[1]) and int(r[1]) != 0:
+            l[1] = int(r[1])
+        if int(r[2]) > int(l[2]) and int(r[2]) != 0:
+            l[2] = int(r[2])
+    lgame.append(l)
+    return lgame
+
+
 def check_game(game):
     q = [12, 13, 14]
     for r in game:
@@ -48,5 +77,16 @@ def sort_color(txt):
 
 
 if __name__ == "__main__":
-    idxs = first("input.txt")
-    print(idxs)
+    # idxs = first("input.txt")
+    # print(idxs)
+    test = """
+Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
+Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
+Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
+Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
+Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
+    """
+    test = test.split("\n")[1:-1]
+    print(test)
+    res = second("input.txt")
+    print(res)
