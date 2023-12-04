@@ -14,7 +14,6 @@ def part_one(input_path):
 
 
 def part_two(input_path="", test=None):
-    print(input_path)
     if input_path != "":
         with open(input_path, "r") as file:
             cals = file.readlines()
@@ -35,16 +34,15 @@ def t2d(txt):
     i = 0
     s = ""
     ns = txt
-    print(txt)
     while i < len(txt):
         s += txt[i]
         m = None
         for idx, t in enumerate(td):
             m = re.search(rf"{re.escape(t)}", s)
             if m:
-                ns = re.sub(rf"{m.group()}", str(idx + 1), ns)
+                ns = re.sub(rf"{m.group()}", str(idx + 1) + m.group()[-1], ns)
+
         i += 1
-    print(ns)
     return ns
 
 
